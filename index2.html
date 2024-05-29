@@ -51,6 +51,7 @@
             max-width: 600px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #00ff00;
+            animation: fadein 2s;
         }
         .terminal-output {
             margin-bottom: 20px;
@@ -87,6 +88,16 @@
                 opacity: 1;
             }
         }
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,6 +116,9 @@
     <div class="terminal">
         <div class="terminal-output" id="terminal-output">
             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
+            <p><span class="prompt">>_</span> cd ipop</p>
+            <p><span class="prompt">>_</span> cd curriculum</p>
+            <p><span class="prompt">>_</span> cd linkedin</p>
         </div>
         <div class="command-line">
             <span class="prompt">>_</span>

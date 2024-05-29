@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Presentación - Nil Vico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +113,7 @@
             height: 20px;
             background-color: rgba(0, 255, 0, 0.7); /* Color más oscuro y opaco */
             position: absolute;
+            transition: transform 1s linear;
         }
 
         .food {
@@ -169,16 +170,14 @@
         }
 
         function getRandomPosition() {
-            const contentRect = contentContainer.getBoundingClientRect();
-            const x = Math.random() * (contentRect.width - 20);
-            const y = Math.random() * (contentRect.height - 20);
+            const x = Math.random() * (window.innerWidth - 20);
+            const y = Math.random() * (window.innerHeight - 20);
             return { x, y };
         }
 
         function moveSnake() {
             const { x, y } = getRandomPosition();
-            snake.style.left = `${x}px`;
-            snake.style.top = `${y}px`;
+            snake.style.transform = `translate(${x}px, ${y}px)`;
             if (detectCollision(snake, food)) {
                 moveFood();
             }
@@ -186,8 +185,7 @@
 
         function moveFood() {
             const { x, y } = getRandomPosition();
-            food.style.left = `${x}px`;
-            food.style.top = `${y}px`;
+            food.style.transform = `translate(${x}px, ${y}px)`;
         }
 
         function detectCollision(snake, food) {

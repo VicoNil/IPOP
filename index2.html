@@ -12,23 +12,18 @@
             font-family: 'Roboto Mono', monospace;
             margin: 0;
             overflow: hidden;
-            background-color: #333;
+            background-color: #000;
+            color: #00ff00;
         }
         .matrix {
-            position: absolute;
-            color: #0F0;
-            font-size: 16px;
-            pointer-events: none;
-            user-select: none;
-            animation: animate 10s linear infinite;
-        }
-        @keyframes animate {
-            0% {
-                transform: translateY(-100vh);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            overflow: hidden;
+            z-index: 0;
         }
         .terminal-container {
             position: absolute;
@@ -42,10 +37,12 @@
             max-width: 600px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #00ff00;
-            overflow: hidden;
+            z-index: 1;
         }
         .terminal-output {
             margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
         }
         .command-line {
             display: flex;
@@ -79,28 +76,23 @@
                 opacity: 1;
             }
         }
-        @keyframes fadein {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
+        .matrix span {
+            display: inline-block;
+            position: absolute;
+            top: -100px;
+            animation: drop 4s infinite;
+            color: #0F0;
+            font-size: 16px;
+        }
+        @keyframes drop {
             to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
+                transform: translateY(100vh);
             }
         }
     </style>
 </head>
 <body>
-    <div class="matrix">
-        <?php
-        $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        for ($i = 0; $i < 1000; $i++) {
-            $char = $letters[rand(0, strlen($letters) - 1)];
-            echo "<span>$char</span>";
-        }
-        ?>
-    </div>
+    <div class="matrix"></div>
 
     <div class="terminal-container">
         <div class="terminal-output" id="terminal-output">
@@ -145,11 +137,29 @@
                         response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin.</p>';
                 }
 
-                output.innerHTML = '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                 event.target.value = '';
                 output.scrollTop = output.scrollHeight;
             }
         });
+
+        function createMatrix() {
+            const matrix = document.querySelector('.matrix');
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            const fontSize = 16;
+            const columns = Math.floor(window.innerWidth / fontSize);
+
+            for (let i = 0; i < 300; i++) {
+                const span = document.createElement('span');
+                span.textContent = letters[Math.floor(Math.random() * letters.length)];
+                span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
+                span.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                span.style.animationDelay = `${Math.random() * 5}s`;
+                matrix.appendChild(span);
+            }
+        }
+
+        createMatrix();
     </script>
 </body>
 </html>

@@ -160,7 +160,7 @@
         </div>
         <div class="terminal-output" id="terminal-output">
             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
-            <p><span class="prompt">>_</span> cd sobre mí</p>
+            <p><span class="prompt">>_</span> cd sobre mi</p>
             <p><span class="prompt">>_</span> cd curriculum</p>
             <p><span class="prompt">>_</span> cd linkedin</p>
             <p><span class="prompt">>_</span> clear</p>
@@ -181,7 +181,7 @@
                 let response = '';
 
                 switch (input) {
-                    case 'cd sobre mí':
+                    case 'cd sobre mi':
                         response = '<p><span class="blink">Conectando a Nil Vico...</span></p>';
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';

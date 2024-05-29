@@ -142,7 +142,7 @@
             }
         }
         .matrix.rise span {
-            animation: rise 1s linear 1; /* Ajustamos la velocidad a 1s */
+            animation: rise 2s linear 1; /* Ajustamos la velocidad a 2s */
         }
     </style>
 </head>
@@ -194,7 +194,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000); // Duración ajustada a la velocidad de la animación
+                            }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd curriculum':
@@ -210,7 +210,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000); // Duración ajustada a la velocidad de la animación
+                            }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd linkedin':
@@ -226,7 +226,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000); // Duración ajustada a la velocidad de la animación
+                            }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'clear':
@@ -282,8 +282,8 @@
                 const span = document.createElement('span');
                 span.textContent = letters[Math.floor(Math.random() * letters.length)];
                 span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
-                span.style.animationDuration = `1s`; // Hacer la animación más rápida
-                span.style.animationDelay = `${Math.random() * 0.5}s`;
+                span.style.animationDuration = `2s`; // Hacer la animación más lenta
+                span.style.animationDelay = `${Math.random() * 1}s`; // Para asegurar que todas las letras cubran la pantalla
                 matrix.appendChild(span);
             }
         }

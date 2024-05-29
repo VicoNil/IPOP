@@ -16,12 +16,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             position: relative;
         }
         img {
             max-width: 100%;
-            max-height: 100%;
+            max-height: 80%;
             z-index: 1;
         }
         .matrix {
@@ -58,10 +59,25 @@
         .matrix.rise span {
             animation: rise 2s linear infinite; /* Ajustamos la velocidad a 2s y lo hacemos infinito */
         }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #282828;
+            color: #00ff00;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #444;
+            z-index: 1;
+        }
+        .back-button:hover {
+            background-color: #444;
+        }
     </style>
 </head>
 <body>
     <img src="https://viconil.github.io/IPOP/cvnil.jpg" alt="Curriculum Vitae">
+    <a href="https://viconil.github.io/IPOP/terminal.html" class="back-button">Volver a la página principal</a>
     <div class="matrix" id="matrix"></div>
 
     <script>

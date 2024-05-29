@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Mi Presentación - Nil Vico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Presentación - Nil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -47,8 +47,6 @@
             max-height: 80vh; /* Altura máxima ajustada */
             overflow-y: auto;
             font-size: 14px; /* Tamaño de fuente reducido */
-            border: 2px solid #444; /* Borde menos destacado */
-            box-sizing: border-box;
         }
 
         .profile-info {
@@ -107,27 +105,12 @@
                 transform: translateY(calc(100vh + 100px));
             }
         }
-
-        .snake {
-            width: 20px;
-            height: 20px;
-            background-color: rgba(0, 255, 0, 0.7); /* Color más oscuro y opaco */
-            position: absolute;
-            transition: transform 1s linear;
-        }
-
-        .food {
-            width: 20px;
-            height: 20px;
-            background-color: rgba(255, 0, 0, 0.7);
-            position: absolute;
-        }
-
     </style>
 </head>
 <body>
     <div class="matrix" id="matrix"></div>
-    <div class="content-container" id="content-container">
+
+    <div class="content-container">
         <div class="profile-info">
             <img src="ruta/a/tu/foto.jpg" alt="Foto de Nil Vico" class="profile-photo">
             <p>¿Videojuegos? ¿Ciberseguridad?</p>
@@ -141,16 +124,11 @@
             <p>Es un gran placer para mí presentarme y exteriorizar esta batalla entre dos mundos tan emocionantes.</p>
             <a href="ruta/a/pagina/anterior" class="back-button">Volver</a>
         </div>
-        <div id="snake" class="snake"></div>
-        <div id="food" class="food"></div>
     </div>
-    <script>
-        const matrix = document.querySelector('.matrix');
-        const snake = document.getElementById('snake');
-        const food = document.getElementById('food');
-        const contentContainer = document.getElementById('content-container');
 
+    <script>
         function createMatrix() {
+            const matrix = document.querySelector('.matrix');
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
             const fontSize = 16;
             const columns = Math.floor(window.innerWidth / fontSize);
@@ -169,39 +147,7 @@
             }
         }
 
-        function getRandomPosition() {
-            const x = Math.random() * (window.innerWidth - 20);
-            const y = Math.random() * (window.innerHeight - 20);
-            return { x, y };
-        }
-
-        function moveSnake() {
-            const { x, y } = getRandomPosition();
-            snake.style.transform = `translate(${x}px, ${y}px)`;
-            if (detectCollision(snake, food)) {
-                moveFood();
-            }
-        }
-
-        function moveFood() {
-            const { x, y } = getRandomPosition();
-            food.style.transform = `translate(${x}px, ${y}px)`;
-        }
-
-        function detectCollision(snake, food) {
-            const snakeRect = snake.getBoundingClientRect();
-            const foodRect = food.getBoundingClientRect();
-            return (
-                snakeRect.left < foodRect.left + foodRect.width &&
-                snakeRect.left + snakeRect.width > foodRect.left &&
-                snakeRect.top < foodRect.top + foodRect.height &&
-                snakeRect.top + snakeRect.height > foodRect.top
-            );
-        }
-
-        setInterval(moveSnake, 1000);
         createMatrix();
-        moveFood();
     </script>
 </body>
 </html>

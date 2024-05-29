@@ -142,7 +142,7 @@
             }
         }
         .matrix.rise span {
-            animation: rise 2s linear 1; /* Ajustamos la velocidad a 2s */
+            animation: rise 2s linear infinite; /* Ajustamos la velocidad a 2s y lo hacemos infinito */
         }
     </style>
 </head>
@@ -286,6 +286,23 @@
                 span.style.animationDelay = `${Math.random() * 1}s`; // Para asegurar que todas las letras cubran la pantalla
                 matrix.appendChild(span);
             }
+
+            // Agregar más letras durante la transición
+            let additionalLetters = setInterval(() => {
+                for (let i = 0; i < 50; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = letters[Math.floor(Math.random() * letters.length)];
+                    span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
+                    span.style.animationDuration = `2s`;
+                    span.style.animationDelay = `${Math.random() * 1}s`;
+                    matrix.appendChild(span);
+                }
+            }, 500);
+
+            // Detener la adición de letras después de la duración de la animación
+            setTimeout(() => {
+                clearInterval(additionalLetters);
+            }, 2000);
         }
 
         createMatrix();

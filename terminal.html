@@ -180,36 +180,34 @@
                 const matrix = document.getElementById('matrix');
                 let response = '';
 
-                function executeCommand(command, responseText, url, newTab = false) {
-                    response = `<p><span class="blink">${responseText}</span></p>`;
-                    output.innerHTML += `<p><span class="prompt">>_</span> ${command}</p>` + response;
-                    event.target.value = '';
-                    setTimeout(function() {
-                        terminalContainer.style.display = 'none';
-                        createTransitionMatrix();
-                        matrix.classList.add('rise');
-                        setTimeout(function() {
-                            if (newTab) {
-                                window.open(url, '_blank');
-                                terminalContainer.style.display = 'block';
-                                matrix.classList.remove('rise');
-                                createMatrix();
-                            } else {
-                                window.location.href = url;
-                            }
-                        }, 2000); // Duración ajustada a la velocidad de la animación
-                    }, 3000);
-                }
-
                 switch (input) {
                     case 'cd sobre mi':
-                        executeCommand('cd sobre mi', 'Conectando a Nil Vico...', 'https://viconil.github.io/IPOP/index.html');
+                        response = '<p><span class="blink">Conectando a Nil Vico...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
+                        setTimeout(function() {
+                            terminalContainer.style.display = 'none';
+                            matrix.classList.add('rise');
+                            setTimeout(function() {
+                                window.location.href = 'https://viconil.github.io/IPOP/index.html';
+                            }, 2000); // Duración ajustada a la velocidad de la animación
+                        }, 3000);
                         break;
                     case 'cd curriculum':
-                        executeCommand('cd curriculum', 'Cargando Currículum Vitae...', 'https://viconil.github.io/IPOP/cv.html');
+                        response = '<p><span class="blink">Cargando Currículum Vitae...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
+                        setTimeout(function() {
+                            window.location.href = 'https://viconil.github.io/IPOP/cv.html';
+                        }, 3000);
                         break;
                     case 'cd linkedin':
-                        executeCommand('cd linkedin', 'Redirigiendo a LinkedIn...', 'https://www.linkedin.com/in/nil-vico-788696279', true);
+                        response = '<p><span class="blink">Redirigiendo a LinkedIn...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
+                        setTimeout(function() {
+                            window.open('https://www.linkedin.com/in/nil-vico-788696279', '_blank');
+                        }, 3000);
                         break;
                     case 'clear':
                         const staticContent = `
@@ -223,7 +221,7 @@
                         break;
                     default:
                         response = '<p>Comando no reconocido. Intenta con: cd sobre mi, cd curriculum, cd linkedin, clear.</p>';
-                        output.innerHTML += `<p><span class="prompt">>_</span> ${input}</p>` + response;
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                 }
                 output.scrollTop = output.scrollHeight;

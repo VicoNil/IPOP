@@ -12,16 +12,7 @@
             font-family: 'Roboto Mono', monospace;
             margin: 0;
             overflow: hidden;
-            background-color: black;
-        }
-        .matrix-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
+            background-color: #333;
         }
         .matrix {
             position: absolute;
@@ -39,19 +30,19 @@
                 transform: translateY(100vh);
             }
         }
-        .terminal {
+        .terminal-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: #222;
             border-radius: 5px;
             padding: 20px;
             width: 80%;
             max-width: 600px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #00ff00;
-            animation: fadein 2s;
+            overflow: hidden;
         }
         .terminal-output {
             margin-bottom: 20px;
@@ -101,19 +92,17 @@
     </style>
 </head>
 <body>
-    <div class="matrix-container">
-        <div class="matrix">
-            <?php
-            $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            for ($i = 0; $i < 1000; $i++) {
-                $char = $letters[rand(0, strlen($letters) - 1)];
-                echo "<span>$char</span>";
-            }
-            ?>
-        </div>
+    <div class="matrix">
+        <?php
+        $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for ($i = 0; $i < 1000; $i++) {
+            $char = $letters[rand(0, strlen($letters) - 1)];
+            echo "<span>$char</span>";
+        }
+        ?>
     </div>
 
-    <div class="terminal">
+    <div class="terminal-container">
         <div class="terminal-output" id="terminal-output">
             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
             <p><span class="prompt">>_</span> cd ipop</p>

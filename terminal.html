@@ -194,11 +194,11 @@
                         }, 3000);
                         break;
                     case 'cd curriculum':
-                        response = '<p><span class="blink">Descargando Currículum Vitae...</span></p>';
+                        response = '<p><span class="blink">Cargando Currículum Vitae...</span></p>';
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                         setTimeout(function() {
-                            window.open('https://viconil.github.io/IPOP/cv.html');
+                            window.location.href = 'https://viconil.github.io/IPOP/cv.html';
                         }, 3000);
                         break;
                     case 'cd linkedin':

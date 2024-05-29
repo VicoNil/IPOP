@@ -32,8 +32,8 @@
             transform: translate(-50%, -50%);
             background-color: #2b2b2b; /* Color de fondo de la terminal */
             border-radius: 8px;
-            width: 80%;
-            max-width: 800px;
+            width: 70%; /* Ajustado para hacerlo un poco más pequeño */
+            max-width: 700px; /* Ajustado para hacerlo un poco más pequeño */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             z-index: 1;
             border: 1px solid #444;
@@ -142,7 +142,7 @@
             }
         }
         .matrix.rise span {
-            animation: rise 1s linear 1;
+            animation: rise 1s linear 1; /* Ajustamos la velocidad a 1s */
         }
     </style>
 </head>
@@ -187,12 +187,14 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
                             matrix.classList.add('rise');
                             setTimeout(function() {
                                 window.open('ruta/a/tu/pagina/ipop', '_blank');
                                 matrix.classList.remove('rise');
+                                createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000);
+                            }, 1000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd curriculum':
@@ -201,12 +203,14 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
                             matrix.classList.add('rise');
                             setTimeout(function() {
                                 window.open('ruta/a/tu/CV.pdf', '_blank');
                                 matrix.classList.remove('rise');
+                                createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000);
+                            }, 1000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd linkedin':
@@ -215,12 +219,14 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
                             matrix.classList.add('rise');
                             setTimeout(function() {
                                 window.open('https://www.linkedin.com/in/tu-perfil-linkedin', '_blank');
                                 matrix.classList.remove('rise');
+                                createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 1000);
+                            }, 1000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'clear':
@@ -248,12 +254,36 @@
             const fontSize = 16;
             const columns = Math.floor(window.innerWidth / fontSize);
 
+            while (matrix.firstChild) {
+                matrix.removeChild(matrix.firstChild);
+            }
+
             for (let i = 0; i < 300; i++) {
                 const span = document.createElement('span');
                 span.textContent = letters[Math.floor(Math.random() * letters.length)];
                 span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
                 span.style.animationDuration = `${Math.random() * 5 + 3}s`;
                 span.style.animationDelay = `${Math.random() * 5}s`;
+                matrix.appendChild(span);
+            }
+        }
+
+        function createTransitionMatrix() {
+            const matrix = document.querySelector('.matrix');
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            const fontSize = 16;
+            const columns = Math.floor(window.innerWidth / fontSize);
+
+            while (matrix.firstChild) {
+                matrix.removeChild(matrix.firstChild);
+            }
+
+            for (let i = 0; i < 1000; i++) { // Aumentar el número de letras
+                const span = document.createElement('span');
+                span.textContent = letters[Math.floor(Math.random() * letters.length)];
+                span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
+                span.style.animationDuration = `1s`; // Hacer la animación más rápida
+                span.style.animationDelay = `${Math.random() * 0.5}s`;
                 matrix.appendChild(span);
             }
         }

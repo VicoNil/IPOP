@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Presentación - [Tu Nombre]</title>
+    <title>Mi Presentación - Nil Vico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -187,13 +187,9 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
-                            createTransitionMatrix();
                             matrix.classList.add('rise');
                             setTimeout(function() {
-                                window.open('https://viconil.github.io/IPOP/index.html');
-                                matrix.classList.remove('rise');
-                                createMatrix();
-                                terminalContainer.style.display = 'block';
+                                window.location.href = 'https://viconil.github.io/IPOP/index.html';
                             }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
@@ -202,15 +198,7 @@
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                         setTimeout(function() {
-                            terminalContainer.style.display = 'none';
-                            createTransitionMatrix();
-                            matrix.classList.add('rise');
-                            setTimeout(function() {
-                                window.open('ruta/a/tu/CV.pdf', '_blank');
-                                matrix.classList.remove('rise');
-                                createMatrix();
-                                terminalContainer.style.display = 'block';
-                            }, 2000); // Duración ajustada a la velocidad de la animación
+                            window.open('ruta/a/tu/CV.pdf', '_blank');
                         }, 3000);
                         break;
                     case 'cd linkedin':
@@ -218,21 +206,13 @@
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                         setTimeout(function() {
-                            terminalContainer.style.display = 'none';
-                            createTransitionMatrix();
-                            matrix.classList.add('rise');
-                            setTimeout(function() {
-                                window.open('www.linkedin.com/in/nil-vico-788696279');
-                                matrix.classList.remove('rise');
-                                createMatrix();
-                                terminalContainer.style.display = 'block';
-                            }, 2000); // Duración ajustada a la velocidad de la animación
+                            window.open('https://www.linkedin.com/in/nil-vico-788696279', '_self');
                         }, 3000);
                         break;
                     case 'clear':
                         const staticContent = `
                             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
-                            <p><span class="prompt">>_</span> cd ipop</p>
+                            <p><span class="prompt">>_</span> cd sobre mi</p>
                             <p><span class="prompt">>_</span> cd curriculum</p>
                             <p><span class="prompt">>_</span> cd linkedin</p>
                             <p><span class="prompt">>_</span> clear</p>
@@ -240,7 +220,7 @@
                         output.innerHTML = staticContent;
                         break;
                     default:
-                        response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin, clear.</p>';
+                        response = '<p>Comando no reconocido. Intenta con: cd sobre mi, cd curriculum, cd linkedin, clear.</p>';
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                 }

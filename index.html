@@ -6,78 +6,129 @@
     <title>Mi Presentación - Nil Vico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             overflow: hidden;
-            background-color: #3a3a3a;
-            color: #00ff00;
+            background-color: #1a1a1a; /* Fondo oscuro */
+            color: #00ff00; /* Texto verde neón */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
         }
+
         .matrix {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.5); /* Fondo un poco más opaco */
             overflow: hidden;
             z-index: 0;
         }
-        .central-window {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #2b2b2b;
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(43, 43, 43, 0.9); /* Fondo ligeramente opaco */
             border-radius: 8px;
-            width: 60%;
-            max-width: 700px;
-            height: 70%;
-            max-height: 600px;
+            width: 70%; /* Ancho incrementado */
+            max-width: 900px; /* Ancho incrementado */
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            z-index: 1;
-            overflow: hidden;
+            text-align: center;
+            color: #fff; /* Texto blanco para el contenido */
+            max-height: 80vh; /* Altura máxima ajustada */
+            overflow-y: auto;
+            font-size: 14px; /* Tamaño de fuente reducido */
+            border: 2px solid #444; /* Borde menos destacado */
+            box-sizing: border-box;
+        }
+
+        .profile-info {
+            margin: 20px 0;
+        }
+
+        .profile-info p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #282828;
+            color: #00ff00;
+            text-decoration: none;
+            border-radius: 4px;
             border: 1px solid #444;
         }
-        .central-content {
-            height: 100%;
-            overflow-y: auto;
+
+        .back-button:hover {
+            background-color: #444;
         }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .matrix span {
+            display: inline-block;
+            position: absolute;
+            top: -100px;
+            animation: drop 4s infinite;
+            color: rgba(0, 255, 0, 0.5); /* Color verde opaco */
+            font-size: 16px;
+            font-family: 'Press Start 2P', sans-serif; /* Fuente temática de videojuegos */
+        }
+
+        @keyframes drop {
+            to {
+                transform: translateY(calc(100vh + 100px));
+            }
+        }
+
         .snake {
             width: 20px;
             height: 20px;
-            background-color: rgba(0, 255, 0, 0.7);
+            background-color: rgba(0, 255, 0, 0.7); /* Color más oscuro y opaco */
             position: absolute;
         }
+
         .food {
             width: 20px;
             height: 20px;
             background-color: rgba(255, 0, 0, 0.7);
             position: absolute;
         }
-        .matrix span {
-            display: inline-block;
-            position: absolute;
-            top: -100px;
-            animation: drop 4s infinite;
-            color: #0F0;
-            font-size: 16px;
-        }
-        @keyframes drop {
-            to {
-                transform: translateY(calc(100vh + 100px));
-            }
-        }
+
     </style>
 </head>
 <body>
     <div class="matrix" id="matrix"></div>
-    <div class="central-window" id="central-window">
-        <div class="central-content" id="central-content">
-            <h1>Hola, soy Nil Vico</h1>
+    <div class="content-container" id="content-container">
+        <div class="profile-info">
+            <img src="ruta/a/tu/foto.jpg" alt="Foto de Nil Vico" class="profile-photo">
             <p>¿Videojuegos? ¿Ciberseguridad?</p>
             <p>Me llamo Nil Vico Lozano y, desde pequeño, siempre he sentido una atracción inexplicable por el mundo detrás de las pantallas.</p>
             <p>Empujado por una gran curiosidad, llevo 4 años cursando informática con el objetivo de adquirir ese superpoder de controlar aquello que nos domina poco a poco.</p>
@@ -87,6 +138,7 @@
             <p>La capacidad de proteger y el poder de atacar... Es emocionante pensar en las infinitas posibilidades que ofrecen estos conocimientos.</p>
             <p>Este es el comienzo de mi gran aventura y te invito a seguirla de cerca, viendo mis progresos, proyectos y conocimientos, e incluso aprendiendo de ellos.</p>
             <p>Es un gran placer para mí presentarme y exteriorizar esta batalla entre dos mundos tan emocionantes.</p>
+            <a href="ruta/a/pagina/anterior" class="back-button">Volver</a>
         </div>
         <div id="snake" class="snake"></div>
         <div id="food" class="food"></div>
@@ -95,7 +147,7 @@
         const matrix = document.querySelector('.matrix');
         const snake = document.getElementById('snake');
         const food = document.getElementById('food');
-        const centralWindow = document.getElementById('central-window');
+        const contentContainer = document.getElementById('content-container');
 
         function createMatrix() {
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -117,9 +169,9 @@
         }
 
         function getRandomPosition() {
-            const centralRect = centralWindow.getBoundingClientRect();
-            const x = Math.floor(Math.random() * (centralRect.width - 20));
-            const y = Math.floor(Math.random() * (centralRect.height - 20));
+            const contentRect = contentContainer.getBoundingClientRect();
+            const x = Math.random() * (contentRect.width - 20);
+            const y = Math.random() * (contentRect.height - 20);
             return { x, y };
         }
 
@@ -149,7 +201,7 @@
             );
         }
 
-        setInterval(moveSnake, 500);
+        setInterval(moveSnake, 1000);
         createMatrix();
         moveFood();
     </script>

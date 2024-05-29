@@ -47,6 +47,8 @@
             max-height: 80vh; /* Altura máxima ajustada */
             overflow-y: auto;
             font-size: 14px; /* Tamaño de fuente reducido */
+            border: 5px solid #00ff00; /* Añadir borde verde neón */
+            box-sizing: border-box;
         }
 
         .profile-info {
@@ -105,6 +107,45 @@
                 transform: translateY(calc(100vh + 100px));
             }
         }
+
+        .snake-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .snake {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        @keyframes move-snake {
+            0% { top: 0; left: 0; }
+            25% { top: 0; left: calc(100% - 20px); }
+            50% { top: calc(100% - 20px); left: calc(100% - 20px); }
+            75% { top: calc(100% - 20px); left: 0; }
+            100% { top: 0; left: 0; }
+        }
+
+        .snake.move {
+            animation: move-snake 10s linear infinite;
+        }
+
+        .food {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +165,11 @@
             <p>Es un gran placer para mí presentarme y exteriorizar esta batalla entre dos mundos tan emocionantes.</p>
             <a href="ruta/a/pagina/anterior" class="back-button">Volver</a>
         </div>
+    </div>
+
+    <div class="snake-container">
+        <div class="snake move" id="snake"></div>
+        <div class="food" id="food"></div>
     </div>
 
     <script>
@@ -147,7 +193,21 @@
             }
         }
 
+        function moveFood() {
+            const food = document.getElementById('food');
+            const container = document.querySelector('.content-container');
+            const maxX = container.offsetWidth - 20;
+            const maxY = container.offsetHeight - 20;
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            food.style.left = `${randomX}px`;
+            food.style.top = `${randomY}px`;
+        }
+
+        document.getElementById('snake').addEventListener('animationiteration', moveFood);
+
         createMatrix();
+        moveFood();
     </script>
 </body>
 </html>

@@ -121,12 +121,35 @@
                 transform: translateY(100vh);
             }
         }
+        @keyframes hacker-animation {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        .hacker-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 2;
+            display: none;
+            animation: hacker-animation 1s linear 0s 1;
+        }
     </style>
 </head>
 <body>
     <div class="matrix"></div>
+    <div class="hacker-effect" id="hacker-effect"></div>
 
-    <div class="terminal-container">
+    <div class="terminal-container" id="terminal-container">
         <div class="terminal-header">
             <div class="terminal-buttons">
                 <div class="terminal-button button-close"></div>
@@ -140,6 +163,7 @@
             <p><span class="prompt">>_</span> cd ipop</p>
             <p><span class="prompt">>_</span> cd curriculum</p>
             <p><span class="prompt">>_</span> cd linkedin</p>
+            <p><span class="prompt">>_</span> clear</p>
         </div>
         <div class="command-line">
             <span class="prompt">>_</span>
@@ -152,33 +176,61 @@
             if (event.key === 'Enter') {
                 const input = event.target.value.trim().toLowerCase();
                 const output = document.getElementById('terminal-output');
+                const terminalContainer = document.getElementById('terminal-container');
+                const hackerEffect = document.getElementById('hacker-effect');
                 let response = '';
 
                 switch (input) {
                     case 'cd ipop':
                         response = '<p><span class="blink">Conectando a [Tu Nombre]...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
                         setTimeout(function() {
-                            window.location.href = 'ruta/a/tu/pagina/ipop';
+                            terminalContainer.style.display = 'none';
+                            hackerEffect.style.display = 'block';
+                            setTimeout(function() {
+                                hackerEffect.style.display = 'none';
+                                window.location.href = 'ruta/a/tu/pagina/ipop';
+                                terminalContainer.style.display = 'block';
+                            }, 1000);
                         }, 3000);
                         break;
                     case 'cd curriculum':
                         response = '<p><span class="blink">Descargando Currículum Vitae...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
                         setTimeout(function() {
-                            window.open('ruta/a/tu/CV.pdf', '_blank');
+                            terminalContainer.style.display = 'none';
+                            hackerEffect.style.display = 'block';
+                            setTimeout(function() {
+                                hackerEffect.style.display = 'none';
+                                window.open('ruta/a/tu/CV.pdf', '_blank');
+                                terminalContainer.style.display = 'block';
+                            }, 1000);
                         }, 3000);
                         break;
                     case 'cd linkedin':
                         response = '<p><span class="blink">Redirigiendo a LinkedIn...</span></p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
                         setTimeout(function() {
-                            window.open('https://www.linkedin.com/in/tu-perfil-linkedin', '_blank');
+                            terminalContainer.style.display = 'none';
+                            hackerEffect.style.display = 'block';
+                            setTimeout(function() {
+                                hackerEffect.style.display = 'none';
+                                window.open('https://www.linkedin.com/in/tu-perfil-linkedin', '_blank');
+                                terminalContainer.style.display = 'block';
+                            }, 1000);
                         }, 3000);
                         break;
+                    case 'clear':
+                        output.innerHTML = '';
+                        break;
                     default:
-                        response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin.</p>';
+                        response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin, clear.</p>';
+                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                        event.target.value = '';
                 }
-
-                output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
-                event.target.value = '';
                 output.scrollTop = output.scrollHeight;
             }
         });

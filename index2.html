@@ -13,17 +13,6 @@
             margin: 0;
             overflow: hidden;
             background-color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            perspective: 1000px;
-        }
-        .matrix-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
         }
         .matrix {
             position: absolute;
@@ -35,13 +24,17 @@
         }
         @keyframes animate {
             0% {
-                transform: translateY(-100%);
+                transform: translateY(-100vh);
             }
             100% {
-                transform: translateY(100%);
+                transform: translateY(100vh);
             }
         }
         .terminal-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background-color: #222;
             border-radius: 5px;
             padding: 20px;
@@ -50,24 +43,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #00ff00;
             overflow: hidden;
-            position: relative;
-            transform-style: preserve-3d;
         }
         .terminal-output {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column-reverse;
-            gap: 10px;
-            overflow-y: auto;
-            padding: 0 15px;
+            margin-bottom: 20px;
         }
         .command-line {
             display: flex;
-            align-items: center;
         }
         .prompt {
             margin-right: 10px;
@@ -108,45 +89,25 @@
                 transform: translate(-50%, -50%);
             }
         }
-        .command {
-            position: absolute;
-            top: -50px;
-            left: calc(10% + 50px);
-            color: #00ff00;
-            font-family: 'Roboto Mono', monospace;
-            white-space: nowrap;
-            animation: fallingCommand 10s linear infinite;
-        }
-        @keyframes fallingCommand {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="matrix-container">
-        <div class="matrix">
-            <?php
-            $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for ($i = 0; $i < 100; $i++) {
-                $char = $letters[rand(0, strlen($letters) - 1)];
-                echo "<span>$char</span>";
-            }
-            ?>
-        </div>
+    <div class="matrix">
+        <?php
+        $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for ($i = 0; $i < 1000; $i++) {
+            $char = $letters[rand(0, strlen($letters) - 1)];
+            echo "<span>$char</span>";
+        }
+        ?>
     </div>
 
     <div class="terminal-container">
         <div class="terminal-output" id="terminal-output">
             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
-            <!-- Este es un ejemplo, los comandos no serán visibles aquí -->
-            <!-- <p><span class="prompt">>_</span> cd ipop</p> -->
-            <!-- <p><span class="prompt">>_</span> cd curriculum</p> -->
-            <!-- <p><span class="prompt">>_</span> cd linkedin</p> -->
+            <p><span class="prompt">>_</span> cd ipop</p>
+            <p><span class="prompt">>_</span> cd curriculum</p>
+            <p><span class="prompt">>_</span> cd linkedin</p>
         </div>
         <div class="command-line">
             <span class="prompt">>_</span>
@@ -155,31 +116,10 @@
     </div>
 
     <script>
-        const commands = ['cd ipop', 'cd curriculum', 'cd linkedin']; // Lista de comandos
-        const terminalOutput = document.getElementById('terminal-output');
-
-        // Función para generar un comando aleatorio
-        function getRandomCommand() {
-            return commands[Math.floor(Math.random() * commands.length)];
-        }
-
-        // Función para agregar un nuevo comando al terminal
-        function addCommandToTerminal() {
-            const newCommand = document.createElement('div');
-            newCommand.classList.add('command');
-            newCommand.textContent = getRandomCommand();
-            terminalOutput.appendChild(newCommand);
-            setTimeout(() => {
-                newCommand.remove(); // Elimina el comando después de un tiempo
-            }, 10000); // Tiempo en milisegundos antes de eliminar el comando
-        }
-
-        // Llamada inicial y repetida para agregar comandos
-        setInterval(addCommandToTerminal, 500); // Agrega un nuevo comando cada 500 milisegundos
-
         document.getElementById('command-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 const input = event.target.value.trim().toLowerCase();
+                const output = document.getElementById('terminal-output');
                 let response = '';
 
                 switch (input) {
@@ -202,22 +142,14 @@
                         }, 3000);
                         break;
                     default:
-                        response = '<p>Comando no reconocido. Intenta con:cd ipop, cd curriculum, cd linkedin.</p>';
-
+                        response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin.</p>';
                 }
 
-                const output = document.getElementById('terminal-output');
-                const newCommandOutput = document.createElement('div');
-                newCommandOutput.innerHTML = '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
-                output.appendChild(newCommandOutput);
-
-                event.target.value = ''; // Limpiar la entrada
-                event.preventDefault(); // Prevenir el comportamiento predeterminado de enviar el formulario
-
-                output.scrollTop = output.scrollHeight; // Desplazar hacia abajo para mostrar la última salida
+                output.innerHTML = '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                event.target.value = '';
+                output.scrollTop = output.scrollHeight;
             }
         });
     </script>
 </body>
 </html>
-

@@ -6,52 +6,95 @@
     <title>Mi Presentación - Nil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto Mono', monospace;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            overflow: hidden;
+            background-color: #3a3a3a; /* Fondo gris más claro */
+            color: #00ff00;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Fondo un poco más opaco */
+            overflow: hidden;
+            z-index: 0;
         }
 
-        header .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .terminal-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2b2b2b; /* Color de fondo de la terminal */
+            border-radius: 8px;
+            width: 70%; /* Ajustado para hacerlo un poco más pequeño */
+            max-width: 700px; /* Ajustado para hacerlo un poco más pequeño */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            border: 1px solid #444;
+            padding: 20px;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1e1e; /* Color de la barra de título */
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom: 1px solid #444;
+            color: #fff;
+        }
+
+        .terminal-buttons {
+            display: flex;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .button-close {
+            background-color: #ff5f56;
+        }
+
+        .button-minimize {
+            background-color: #ffbd2e;
+        }
+
+        .button-maximize {
+            background-color: #27c93f;
+        }
+
+        .terminal-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .profile-info {
+            margin: 20px 0;
             text-align: center;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        .profile {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .profile .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        .profile-info p {
+            margin: 10px 0;
+            line-height: 1.6;
         }
 
         .profile-photo {
@@ -62,65 +105,112 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .profile-info p {
-            margin: 10px 0;
-            line-height: 1.6;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        footer a {
-            color: #3498db;
-            margin: 0 10px;
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1e1e1e;
+            color: #00ff00;
             text-decoration: none;
-            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid #444;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .back-button:hover {
+            background-color: #333;
+        }
+
+        .blink {
+            animation: blink 0.6s infinite alternate;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .matrix span {
+            display: inline-block;
+            position: absolute;
+            top: -100px;
+            animation: drop 4s infinite;
+            color: #0F0;
+            font-size: 16px;
+        }
+
+        @keyframes drop {
+            to {
+                transform: translateY(calc(100vh + 100px));
+            }
+        }
+
+        @keyframes rise {
+            from {
+                transform: translateY(100vh);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
+        }
+
+        .matrix.rise span {
+            animation: rise 2s linear infinite; /* Ajustamos la velocidad a 2s y lo hacemos infinito */
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Hola, soy Nil Vico</h1>
-        </div>
-    </header>
-    <section class="profile">
-        <div class="container">
-            <img src="ruta/a/tu/foto.jpg" alt="Foto de [Tu Nombre]" class="profile-photo">
-            <div class="profile-info">
-                <p>¿Videojuegos? ¿Ciberseguridad?</p>
-                <p>Me llamo Nil Vico Lozano y, desde pequeño, siempre he sentido una atracción inexplicable por el mundo detrás de las pantallas.</p>
-                <p>Empujado por una gran curiosidad, llevo 4 años cursando informática con el objetivo de adquirir ese superpoder de controlar aquello que nos domina poco a poco.</p>
-                <p>La magia de los videojuegos, la creación de nuevos mundos, historias emocionantes, puzzles indescifrables, aventuras sin fin...</p>
-                <p>Mi mente está ansiosa por expulsar todas sus ideas al mundo exterior.</p>
-                <p>Entonces aparece un nuevo personaje: la ciberseguridad. Este mundo tan fascinante de batallas sin fin por el control y el poder de la información.</p>
-                <p>La capacidad de proteger y el poder de atacar... Es emocionante pensar en las infinitas posibilidades que ofrecen estos conocimientos.</p>
-                <p>Este es el comienzo de mi gran aventura y te invito a seguirla de cerca, viendo mis progresos, proyectos y conocimientos, e incluso aprendiendo de ellos.</p>
-                <p>Es un gran placer para mí presentarme y exteriorizar esta batalla entre dos mundos tan emocionantes.</p>
+    <div class="matrix" id="matrix"></div>
+
+    <div class="terminal-container" id="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button button-close"></div>
+                <div class="terminal-button button-minimize"></div>
+                <div class="terminal-button button-maximize"></div>
             </div>
+            <div class="terminal-title">Terminal</div>
         </div>
-    </section>
-    <footer>
-        <div class="container">
-            <a href="https://www.linkedin.com/in/tu-perfil-linkedin" target="_blank">LinkedIn</a>
-            <a href="ruta/a/tu/CV.pdf" target="_blank">Currículum Vitae</a>
+        <div class="profile-info">
+            <img src="ruta/a/tu/foto.jpg" alt="Foto de [Tu Nombre]" class="profile-photo">
+            <p>¿Videojuegos? ¿Ciberseguridad?</p>
+            <p>Me llamo Nil Vico Lozano y, desde pequeño, siempre he sentido una atracción inexplicable por el mundo detrás de las pantallas.</p>
+            <p>Empujado por una gran curiosidad, llevo 4 años cursando informática con el objetivo de adquirir ese superpoder de controlar aquello que nos domina poco a poco.</p>
+            <p>La magia de los videojuegos, la creación de nuevos mundos, historias emocionantes, puzzles indescifrables, aventuras sin fin...</p>
+            <p>Mi mente está ansiosa por expulsar todas sus ideas al mundo exterior.</p>
+            <p>Entonces aparece un nuevo personaje: la ciberseguridad. Este mundo tan fascinante de batallas sin fin por el control y el poder de la información.</p>
+            <p>La capacidad de proteger y el poder de atacar... Es emocionante pensar en las infinitas posibilidades que ofrecen estos conocimientos.</p>
+            <p>Este es el comienzo de mi gran aventura y te invito a seguirla de cerca, viendo mis progresos, proyectos y conocimientos, e incluso aprendiendo de ellos.</p>
+            <p>Es un gran placer para mí presentarme y exteriorizar esta batalla entre dos mundos tan emocionantes.</p>
+            <a href="ruta/a/pagina/anterior" class="back-button">Volver</a>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        function createMatrix() {
+            const matrix = document.querySelector('.matrix');
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            const fontSize = 16;
+            const columns = Math.floor(window.innerWidth / fontSize);
+
+            while (matrix.firstChild) {
+                matrix.removeChild(matrix.firstChild);
+            }
+
+            for (let i = 0; i < 300; i++) {
+                const span = document.createElement('span');
+                span.textContent = letters[Math.floor(Math.random() * letters.length)];
+                span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
+                span.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                span.style.animationDelay = `${Math.random() * 5}s`;
+                matrix.appendChild(span);
+            }
+        }
+
+        createMatrix();
+    </script>
 </body>
 </html>

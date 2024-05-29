@@ -278,7 +278,7 @@
                 matrix.removeChild(matrix.firstChild);
             }
 
-            for (let i = 0; i < 1000; i++) { // Aumentar el número de letras
+            for (let i = 0; i < 300; i++) { // Mantener el número de letras igual que antes
                 const span = document.createElement('span');
                 span.textContent = letters[Math.floor(Math.random() * letters.length)];
                 span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;

@@ -32,8 +32,8 @@
             transform: translate(-50%, -50%);
             background-color: #2b2b2b; /* Color de fondo de la terminal */
             border-radius: 8px;
-            width: 70%; /* Ajustado para hacerlo un poco más pequeño */
-            max-width: 700px; /* Ajustado para hacerlo un poco más pequeño */
+            width: 80%;
+            max-width: 800px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             z-index: 1;
             border: 1px solid #444;
@@ -142,7 +142,7 @@
             }
         }
         .matrix.rise span {
-            animation: rise 2s linear 1; /* Ajustamos la velocidad a 2s */
+            animation: rise 0.5s linear 1; /* Ajustamos la velocidad a 0.5s */
         }
     </style>
 </head>
@@ -194,7 +194,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 2000); // Duración ajustada a la velocidad de la animación
+                            }, 500); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd curriculum':
@@ -210,7 +210,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 2000); // Duración ajustada a la velocidad de la animación
+                            }, 500); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd linkedin':
@@ -226,7 +226,7 @@
                                 matrix.classList.remove('rise');
                                 createMatrix();
                                 terminalContainer.style.display = 'block';
-                            }, 2000); // Duración ajustada a la velocidad de la animación
+                            }, 500); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'clear':
@@ -241,54 +241,4 @@
                         break;
                     default:
                         response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin, clear.</p>';
-                        output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
-                        event.target.value = '';
-                }
-                output.scrollTop = output.scrollHeight;
-            }
-        });
-
-        function createMatrix() {
-            const matrix = document.querySelector('.matrix');
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            const fontSize = 16;
-            const columns = Math.floor(window.innerWidth / fontSize);
-
-            while (matrix.firstChild) {
-                matrix.removeChild(matrix.firstChild);
-            }
-
-            for (let i = 0; i < 300; i++) {
-                const span = document.createElement('span');
-                span.textContent = letters[Math.floor(Math.random() * letters.length)];
-                span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
-                span.style.animationDuration = `${Math.random() * 5 + 3}s`;
-                span.style.animationDelay = `${Math.random() * 5}s`;
-                matrix.appendChild(span);
-            }
-        }
-
-        function createTransitionMatrix() {
-            const matrix = document.querySelector('.matrix');
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            const fontSize = 16;
-            const columns = Math.floor(window.innerWidth / fontSize);
-
-            while (matrix.firstChild) {
-                matrix.removeChild(matrix.firstChild);
-            }
-
-            for (let i = 0; i < 300; i++) { // Mantener el número de letras igual que antes
-                const span = document.createElement('span');
-                span.textContent = letters[Math.floor(Math.random() * letters.length)];
-                span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
-                span.style.animationDuration = `2s`; // Hacer la animación más lenta
-                span.style.animationDelay = `${Math.random() * 1}s`; // Para asegurar que todas las letras cubran la pantalla
-                matrix.appendChild(span);
-            }
-        }
-
-        createMatrix();
-    </script>
-</body>
-</html>
+                        output.innerHTML += '<p><span class="prompt">>_</span>

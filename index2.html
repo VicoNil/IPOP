@@ -30,23 +30,24 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #000; /* Color negro estilo terminal */
-            border-radius: 0; /* Sin borde redondeado */
-            padding: 20px;
+            background-color: #2b2b2b; /* Color de fondo de la terminal */
+            border-radius: 8px;
             width: 80%;
-            max-width: 600px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            color: #00ff00;
+            max-width: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             z-index: 1;
+            border: 1px solid #444;
         }
         .terminal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #1a1a1a; /* Color más oscuro */
-            padding: 5px 10px;
-            color: #fff;
+            background-color: #1e1e1e; /* Color de la barra de título */
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
             border-bottom: 1px solid #444;
+            color: #fff;
         }
         .terminal-buttons {
             display: flex;
@@ -55,7 +56,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 5px;
+            margin-right: 10px;
         }
         .button-close {
             background-color: #ff5f56;
@@ -69,21 +70,25 @@
         .terminal-title {
             flex-grow: 1;
             text-align: center;
-            font-size: 12px;
+            font-size: 14px;
             color: #ccc;
         }
         .terminal-output {
-            margin-top: 10px;
-            margin-bottom: 20px;
-            max-height: 300px;
+            padding: 20px;
+            max-height: 400px;
             overflow-y: auto;
             background-color: #000;
-            padding: 10px;
-            border: 1px solid #333;
-            border-radius: 5px;
+            color: #00ff00;
+            font-size: 14px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
         .command-line {
             display: flex;
+            padding: 10px;
+            background-color: #000;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
         .prompt {
             margin-right: 10px;
@@ -93,8 +98,9 @@
             color: #00ff00;
             border: none;
             outline: none;
-            width: calc(100% - 30px);
+            flex-grow: 1;
             font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
         }
         a {
             color: #00ff00;

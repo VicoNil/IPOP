@@ -187,6 +187,7 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
                             matrix.classList.add('rise');
                             setTimeout(function() {
                                 window.location.href = 'https://viconil.github.io/IPOP/index.html';
@@ -198,7 +199,12 @@
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                         setTimeout(function() {
-                            window.location.href = 'https://viconil.github.io/IPOP/cv.html';
+                            terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
+                            matrix.classList.add('rise');
+                            setTimeout(function() {
+                                window.location.href = 'https://viconil.github.io/IPOP/cv.html';
+                            }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'cd linkedin':
@@ -206,7 +212,15 @@
                         output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
                         event.target.value = '';
                         setTimeout(function() {
-                            window.open('https://www.linkedin.com/in/nil-vico-788696279', '_blank');
+                            terminalContainer.style.display = 'none';
+                            createTransitionMatrix();
+                            matrix.classList.add('rise');
+                            setTimeout(function() {
+                                window.open('https://www.linkedin.com/in/nil-vico-788696279', '_blank');
+                                terminalContainer.style.display = 'block';
+                                matrix.classList.remove('rise');
+                                createMatrix();
+                            }, 2000); // Duración ajustada a la velocidad de la animación
                         }, 3000);
                         break;
                     case 'clear':

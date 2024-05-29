@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Presentación - [Tu Nombre]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .terminal {
+            background-color: #1e272e;
+            border-radius: 5px;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .terminal-output {
+            margin-bottom: 20px;
+        }
+        .command-line {
+            display: flex;
+        }
+        .prompt {
+            margin-right: 10px;
+        }
+        input {
+            background-color: #1e272e;
+            color: #ecf0f1;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-output" id="terminal-output">
+            <p>Bienvenido, escribe uno de los siguientes comandos:</p>
+            <p><span class="prompt">>_</span> ipop</p>
+            <p><span class="prompt">>_</span> curriculum</p>
+            <p><span class="prompt">>_</span> linkedin</p>
+        </div>
+        <div class="command-line">
+            <span class="prompt">>_</span>
+            <input type="text" id="command-input" autofocus>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('command-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const input = event.target.value.trim().toLowerCase();
+                const output = document.getElementById('terminal-output');
+                let response = '';
+
+                switch (input) {
+                    case 'ipop':
+                        response = '<p>[Tu Nombre] es un desarrollador web con experiencia en crear aplicaciones modernas y eficientes. Me apasiona aprender nuevas tecnologías y mejorar mis habilidades continuamente.</p>';
+                        break;
+                    case 'curriculum':
+                        response = '<p>Abriendo el <a href="ruta/a/tu/CV.pdf" target="_blank">Currículum Vitae</a>.</p>';
+                        break;
+                    case 'linkedin':
+                        response = '<p>Visitando <a href="https://www.linkedin.com/in/tu-perfil-linkedin" target="_blank">LinkedIn</a>.</p>';
+                        break;
+                    default:
+                        response = '<p>Comando no reconocido. Intenta con: ipop, curriculum, linkedin.</p>';
+                }
+
+                output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;
+                event.target.value = '';
+                output.scrollTop = output.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

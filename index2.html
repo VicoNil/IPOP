@@ -50,6 +50,17 @@
         a:hover {
             text-decoration: underline;
         }
+        .blink {
+            animation: blink 0.6s infinite alternate;
+        }
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -75,13 +86,22 @@
 
                 switch (input) {
                     case 'cd ipop':
-                        response = '<p>[Tu Nombre] es un desarrollador web con experiencia en crear aplicaciones modernas y eficientes. Me apasiona aprender nuevas tecnologías y mejorar mis habilidades continuamente.</p>';
+                        response = '<p><span class="blink">Conectando a [Tu Nombre]...</span></p>';
+                        setTimeout(function() {
+                            window.location.href = 'ruta/a/tu/pagina/ipop';
+                        }, 3000);
                         break;
                     case 'cd curriculum':
-                        response = '<p>Abriendo el <a href="ruta/a/tu/CV.pdf" target="_blank">Currículum Vitae</a>.</p>';
+                        response = '<p><span class="blink">Descargando Currículum Vitae...</span></p>';
+                        setTimeout(function() {
+                            window.open('ruta/a/tu/CV.pdf', '_blank');
+                        }, 3000);
                         break;
                     case 'cd linkedin':
-                        response = '<p>Visitando <a href="https://www.linkedin.com/in/tu-perfil-linkedin" target="_blank">LinkedIn</a>.</p>';
+                        response = '<p><span class="blink">Redirigiendo a LinkedIn...</span></p>';
+                        setTimeout(function() {
+                            window.open('https://www.linkedin.com/in/tu-perfil-linkedin', '_blank');
+                        }, 3000);
                         break;
                     default:
                         response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin.</p>';

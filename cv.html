@@ -33,7 +33,7 @@
             display: inline-block;
             position: absolute;
             top: -100px;
-            animation: drop 4s infinite;
+            animation: drop 8s infinite;
             color: #0F0;
             font-size: 16px;
         }
@@ -51,7 +51,7 @@
             }
         }
         .matrix.rise span {
-            animation: rise 2s linear infinite; /* Ajustamos la velocidad a 2s y lo hacemos infinito */
+            animation: rise 4s linear infinite; /* Ajustamos la velocidad a 4s y lo hacemos infinito */
         }
     </style>
 </head>
@@ -94,7 +94,7 @@
                 const span = document.createElement('span');
                 span.textContent = letters[Math.floor(Math.random() * letters.length)];
                 span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
-                span.style.animationDuration = `2s`; // Hacer la animación más lenta
+                span.style.animationDuration = `4s`; // Hacer la animación más lenta
                 span.style.animationDelay = `${Math.random() * 1}s`; // Para asegurar que todas las letras cubran la pantalla
                 matrix.appendChild(span);
             }
@@ -105,7 +105,7 @@
                     const span = document.createElement('span');
                     span.textContent = letters[Math.floor(Math.random() * letters.length)];
                     span.style.left = `${Math.floor(Math.random() * columns) * fontSize}px`;
-                    span.style.animationDuration = `2s`;
+                    span.style.animationDuration = `4s`;
                     span.style.animationDelay = `${Math.random() * 1}s`;
                     matrix.appendChild(span);
                 }

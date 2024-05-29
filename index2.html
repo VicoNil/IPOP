@@ -10,8 +10,8 @@
     <style>
         body {
             font-family: 'Roboto Mono', monospace;
-            background-color: #2c3e50;
-            color: #ecf0f1;
+            background-color: #1e1e1e;
+            color: #00ff00;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -19,7 +19,7 @@
             height: 100vh;
         }
         .terminal {
-            background-color: #1e272e;
+            background-color: #2b2b2b;
             border-radius: 5px;
             padding: 20px;
             width: 80%;
@@ -36,14 +36,15 @@
             margin-right: 10px;
         }
         input {
-            background-color: #1e272e;
-            color: #ecf0f1;
+            background-color: #2b2b2b;
+            color: #00ff00;
             border: none;
             outline: none;
             width: 100%;
+            font-family: 'Roboto Mono', monospace;
         }
         a {
-            color: #3498db;
+            color: #00ff00;
             text-decoration: none;
         }
         a:hover {
@@ -55,9 +56,9 @@
     <div class="terminal">
         <div class="terminal-output" id="terminal-output">
             <p>Bienvenido, escribe uno de los siguientes comandos:</p>
-            <p><span class="prompt">>_</span> ipop</p>
-            <p><span class="prompt">>_</span> curriculum</p>
-            <p><span class="prompt">>_</span> linkedin</p>
+            <p><span class="prompt">>_</span> cd ipop</p>
+            <p><span class="prompt">>_</span> cd curriculum</p>
+            <p><span class="prompt">>_</span> cd linkedin</p>
         </div>
         <div class="command-line">
             <span class="prompt">>_</span>
@@ -73,17 +74,17 @@
                 let response = '';
 
                 switch (input) {
-                    case 'ipop':
+                    case 'cd ipop':
                         response = '<p>[Tu Nombre] es un desarrollador web con experiencia en crear aplicaciones modernas y eficientes. Me apasiona aprender nuevas tecnologías y mejorar mis habilidades continuamente.</p>';
                         break;
-                    case 'curriculum':
+                    case 'cd curriculum':
                         response = '<p>Abriendo el <a href="ruta/a/tu/CV.pdf" target="_blank">Currículum Vitae</a>.</p>';
                         break;
-                    case 'linkedin':
+                    case 'cd linkedin':
                         response = '<p>Visitando <a href="https://www.linkedin.com/in/tu-perfil-linkedin" target="_blank">LinkedIn</a>.</p>';
                         break;
                     default:
-                        response = '<p>Comando no reconocido. Intenta con: ipop, curriculum, linkedin.</p>';
+                        response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin.</p>';
                 }
 
                 output.innerHTML += '<p><span class="prompt">>_</span> ' + input + '</p>' + response;

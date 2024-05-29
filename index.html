@@ -47,7 +47,7 @@
             max-height: 80vh; /* Altura máxima ajustada */
             overflow-y: auto;
             font-size: 14px; /* Tamaño de fuente reducido */
-            border: 5px solid #00ff00; /* Añadir borde verde neón */
+            border: 2px solid #444; /* Borde menos destacado */
             box-sizing: border-box;
         }
 
@@ -122,9 +122,9 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #00ff00;
+            background-color: rgba(0, 255, 0, 0.7); /* Color más oscuro y opaco */
             border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
         }
 
         @keyframes move-snake {
@@ -151,7 +151,7 @@
 <body>
     <div class="matrix" id="matrix"></div>
 
-    <div class="content-container">
+    <div class="content-container" id="content-container">
         <div class="profile-info">
             <img src="ruta/a/tu/foto.jpg" alt="Foto de Nil Vico" class="profile-photo">
             <p>¿Videojuegos? ¿Ciberseguridad?</p>
@@ -167,7 +167,7 @@
         </div>
     </div>
 
-    <div class="snake-container">
+    <div class="snake-container" id="snake-container">
         <div class="snake move" id="snake"></div>
         <div class="food" id="food"></div>
     </div>
@@ -195,7 +195,7 @@
 
         function moveFood() {
             const food = document.getElementById('food');
-            const container = document.querySelector('.content-container');
+            const container = document.getElementById('content-container');
             const maxX = container.offsetWidth - 20;
             const maxY = container.offsetHeight - 20;
             const randomX = Math.floor(Math.random() * maxX);

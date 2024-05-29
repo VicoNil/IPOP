@@ -196,18 +196,54 @@
         function moveFood() {
             const food = document.getElementById('food');
             const container = document.getElementById('content-container');
-            const maxX = container.offsetWidth - 20;
-            const maxY = container.offsetHeight - 20;
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            food.style.left = `${randomX}px`;
-            food.style.top = `${randomY}px`;
+            const maxX = container.clientWidth - 20;
+            const maxY = container.clientHeight - 20;
+
+            const positions = [
+                { top: 0, left: Math.random() * maxX + 'px' },
+                { top: Math.random() * maxY + 'px', left: 0 },
+                { top: 'calc(100% - 20px)', left: Math.random() * maxX + 'px' },
+                { top: Math.random() * maxY + 'px', left: 'calc(100% - 20px)' }
+            ];
+
+            const randomPosition = positions[Math.floor(Math.random() * positions.length)];
+            food.style.top = randomPosition.top;
+            food.style.left = randomPosition.left;
+        }
+
+        function moveSnake() {
+            const snake = document.getElementById('snake');
+            const container = document.getElementById('content-container');
+            const maxX = container.clientWidth - 20;
+            const maxY = container.clientHeight - 20;
+
+            snake.style.width = '20px';
+            snake.style.height = '20px';
+
+            const keyframes = [
+                { top: '0', left: '0' },
+                { top: '0', left: `${maxX}px` },
+                { top: `${maxY}px`, left: `${maxX}px` },
+                { top: `${maxY}px`, left: '0' },
+                { top: '0', left: '0' }
+            ];
+
+            const animation = snake.animate(keyframes, {
+                duration: 10000,
+                iterations: Infinity,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => {
+                moveFood();
+            };
         }
 
         document.getElementById('snake').addEventListener('animationiteration', moveFood);
 
         createMatrix();
         moveFood();
+        moveSnake();
     </script>
 </body>
 </html>

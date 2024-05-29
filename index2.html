@@ -121,33 +121,21 @@
                 transform: translateY(100vh);
             }
         }
-        @keyframes hacker-animation {
-            0% {
-                opacity: 0;
+        @keyframes rise {
+            from {
+                transform: translateY(100vh);
             }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
+            to {
+                transform: translateY(-100vh);
             }
         }
-        .hacker-effect {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 2;
-            display: none;
-            animation: hacker-animation 1s linear 0s 1;
+        .matrix.rise span {
+            animation: rise 1s linear 1;
         }
     </style>
 </head>
 <body>
-    <div class="matrix"></div>
-    <div class="hacker-effect" id="hacker-effect"></div>
+    <div class="matrix" id="matrix"></div>
 
     <div class="terminal-container" id="terminal-container">
         <div class="terminal-header">
@@ -177,7 +165,7 @@
                 const input = event.target.value.trim().toLowerCase();
                 const output = document.getElementById('terminal-output');
                 const terminalContainer = document.getElementById('terminal-container');
-                const hackerEffect = document.getElementById('hacker-effect');
+                const matrix = document.getElementById('matrix');
                 let response = '';
 
                 switch (input) {
@@ -187,10 +175,10 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
-                            hackerEffect.style.display = 'block';
+                            matrix.classList.add('rise');
                             setTimeout(function() {
-                                hackerEffect.style.display = 'none';
-                                window.location.href = 'ruta/a/tu/pagina/ipop';
+                                window.open('ruta/a/tu/pagina/ipop', '_blank');
+                                matrix.classList.remove('rise');
                                 terminalContainer.style.display = 'block';
                             }, 1000);
                         }, 3000);
@@ -201,10 +189,10 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
-                            hackerEffect.style.display = 'block';
+                            matrix.classList.add('rise');
                             setTimeout(function() {
-                                hackerEffect.style.display = 'none';
                                 window.open('ruta/a/tu/CV.pdf', '_blank');
+                                matrix.classList.remove('rise');
                                 terminalContainer.style.display = 'block';
                             }, 1000);
                         }, 3000);
@@ -215,16 +203,23 @@
                         event.target.value = '';
                         setTimeout(function() {
                             terminalContainer.style.display = 'none';
-                            hackerEffect.style.display = 'block';
+                            matrix.classList.add('rise');
                             setTimeout(function() {
-                                hackerEffect.style.display = 'none';
                                 window.open('https://www.linkedin.com/in/tu-perfil-linkedin', '_blank');
+                                matrix.classList.remove('rise');
                                 terminalContainer.style.display = 'block';
                             }, 1000);
                         }, 3000);
                         break;
                     case 'clear':
-                        output.innerHTML = '';
+                        const staticContent = `
+                            <p>Bienvenido, escribe uno de los siguientes comandos:</p>
+                            <p><span class="prompt">>_</span> cd ipop</p>
+                            <p><span class="prompt">>_</span> cd curriculum</p>
+                            <p><span class="prompt">>_</span> cd linkedin</p>
+                            <p><span class="prompt">>_</span> clear</p>
+                        `;
+                        output.innerHTML = staticContent;
                         break;
                     default:
                         response = '<p>Comando no reconocido. Intenta con: cd ipop, cd curriculum, cd linkedin, clear.</p>';
